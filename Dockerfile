@@ -1,8 +1,6 @@
-FROM openjdk:17
-VOLUME /tmp 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-expose 8081 # Container में port declare करना
-ENTRYPOINT ["java", "-jar", "/app.jar"]
-CMD ["--server.port=8081"]
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY target/todoapp.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
 
