@@ -27,7 +27,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: Root@123
     volumes:
-      - C:/ProgramData:/MySQL
+      - C:/ProgramData:/MySQL/MySQL Server 8.0/Data
 
 volumes:
   mysql_data:
