@@ -18,7 +18,7 @@ WORKDIR /data
 
 # Copy jar from build stage
 #COPY --from=build /app/target/*.jar app.jar
-COPY target/todoapp.jar app.jar
+COPY target/*.jar app.jar
 
 # Expose the Spring Boot default port
 EXPOSE 8080
