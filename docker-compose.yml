@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: springboot-container
+    container_name: todoapp
     ports:
       - "8080:8080"
     depends_on:
