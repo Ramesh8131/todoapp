@@ -23,6 +23,9 @@ services:
       - "3306:3306"
     environment:
       MYSQL_DATABASE: todoapp
+      MYSQL_ROOT_PASSWORD: Root@123
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Root@123
     volumes:
       - C:/ProgramData:/MySQL/MySQL Server 8.0/Data
 
