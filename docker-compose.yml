@@ -26,6 +26,6 @@ services:
       MYSQL_DATABASE: todoapp           # (optional) default DB create करेगा
       MYSQL_USER: myuser             # ✔️ नया user (root नहीं)
       MYSQL_PASSWORD: user123        # ✔️ उस user का password
-     volumes:
+    volumes:
        - "S:/mysql_data: /var/lib/mysql"   # ✅ Named volume
 
