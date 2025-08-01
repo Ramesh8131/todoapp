@@ -12,8 +12,8 @@ services:
       - mysqldb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/todoapp
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: Root@123
+      SPRING_DATASOURCE_USERNAME: myuser             
+      SPRING_DATASOURCE_PASSWORD: user123
 
   mysqldb:
     image: mysql:8.0
