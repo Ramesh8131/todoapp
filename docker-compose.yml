@@ -1,27 +1,33 @@
 version: '3.8'
 
 services:
-  springboot:
+  springboot-app:
     build:
-    
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/todoapp
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: Root@123
+
   mysqldb:
     image: mysql:8.0
     container_name: mysql-container
     restart: always
+    ports:
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todoapp
       MYSQL_USER: root
       MYSQL_PASSWORD: Root@123
-    ports:
-      - "3306:3306"
     volumes:
-      - c:/mysql-data:/var/lib/mysql
-    networks:
-      - springboot-mysql-net
+      - c:/mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:
-
-networks:
-  springboot-mysql-net:
