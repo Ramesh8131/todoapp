@@ -22,10 +22,7 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: todoapp
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Root@123
     volumes:
       - C:/ProgramData:/MySQL/MySQL Server 8.0/Data
 
