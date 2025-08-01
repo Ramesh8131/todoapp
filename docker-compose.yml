@@ -22,10 +22,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: todoapp
-      MYSQL_ROOT_PASSWORD: Root@123
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Root@123
+      MYSQL_ROOT_PASSWORD: root123   # ✔️ सिर्फ ये चाहिए root के लिए
+      MYSQL_DATABASE: todoapp           # (optional) default DB create करेगा
+      MYSQL_USER: myuser             # ✔️ नया user (root नहीं)
+      MYSQL_PASSWORD: user123        # ✔️ उस user का password
     volumes:
       - C:/ProgramData:/MySQL/MySQL Server 8.0/Data
 
