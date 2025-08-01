@@ -32,4 +32,7 @@ services:
       MYSQL_PASSWORD: user123        # ✔️ उस user का password
     volumes:
        - "c:/mysql_data:/var/lib/mysql"   # ✅ Named volume
+networks:
+  mynetwork:
+    driver: bridge
 
