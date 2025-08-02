@@ -19,15 +19,20 @@ pipeline {
 
     stage('Build') {
       steps {
-        bat 'mvn clean install'
+        bat 'mvn clean packages'
+      }
+    }
+    stage('Start Containers') {
+      steps {
+        bat 'docker-compose up --build'
       }
     }
 
-    stage('Docker Build') {
-      steps {
-        bat 'docker build -t %DOCKER_CREDS_USR%/todoapp:1.0 .'
-      }
-    }
+    // stage('Docker Build') {
+    //   steps {
+    //     bat 'docker build -t %DOCKER_CREDS_USR%/todoapp:1.0 .'
+    //   }
+    // }
 
     stage('Docker Push') {
       steps {
