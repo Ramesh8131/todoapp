@@ -1,6 +1,11 @@
 pipeline {
   agent any
 
+  tools {
+    jdk 'JDK17'               // यह वही name है जो आपने ऊपर दिया
+    maven 'Maven 3.8.6'       // यह भी वही name है
+  }
+
   environment {
     DOCKER_CREDS = credentials('dockerhub-credentials') // only one credentials ID
   }
