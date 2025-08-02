@@ -1,34 +1,43 @@
 pipeline {
-    agent any
+  agent any
 
-    tools {
-        maven 'Maven 3.8.6'  // Jenkins में Maven configure होना चाहिए
-        jdk 'JDK 21'         // Jenkins में JDK configure होना चाहिए
+  environment {
+    DOCKER_USER = credentials('dockerhub-user')
+    DOCKER_PASS = credentials('dockerhub-pass')
+  }
+
+  stages {
+    stage('Clone') {
+      steps {
+        git 'https://github.com/Ramesh8131/todoapp.git'
+      }
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Ramesh8131/todoapp.git'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                bat 'mvn clean package'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                bat 'java -jar target/*.jar'
-            }
-        }
+    stage('Build') {
+      steps {
+        bat 'mvn clean package'
+      }
     }
+
+    stage('Docker Build') {
+      steps {
+        bat 'docker build -t yourdockerhub/todoapp:1.0 .'
+      }
+    }
+
+    stage('Docker Push') {
+      steps {
+        bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
+        bat 'docker push yourdockerhub/todoapp:1.0'
+      }
+    }
+
+    stage('Run Locally') {
+      steps {
+        bat 'docker stop todoapp || exit 0'
+        bat 'docker rm todoapp || exit 0'
+        bat 'docker run -d -p 8081:8081 --name todoapp yourdockerhub/todoapp:1.0'
+      }
+    }
+  }
 }
