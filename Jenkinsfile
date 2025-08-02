@@ -2,12 +2,12 @@ pipeline {
   agent any
 
   tools {
-    jdk 'JDK17'               // यह वही name है जो आपने ऊपर दिया
-    maven 'Maven 3.8.6'       // यह भी वही name है
+    jdk 'JDK17'
+    maven 'Maven 3.8.6'
   }
 
   environment {
-    DOCKER_CREDS = credentials('dockerhub-credentials') // only one credentials ID
+    DOCKER_CREDS = credentials('dockerhub-credentials')
   }
 
   stages {
@@ -25,14 +25,14 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        bat 'docker build -t rameshkumar13111@gmail.com/myapp:1.0 .'
+        bat 'docker build -t %DOCKER_CREDS_USR%/todoapp:1.0 .'
       }
     }
 
     stage('Docker Push') {
       steps {
         bat 'echo %DOCKER_CREDS_PSW% | docker login -u %DOCKER_CREDS_USR% --password-stdin'
-        bat 'docker push rameshkumar13111@gmail.com/todoapp:1.0'
+        bat 'docker push %DOCKER_CREDS_USR%/todoapp:1.0'
       }
     }
 
@@ -40,7 +40,7 @@ pipeline {
       steps {
         bat 'docker stop todoapp || exit 0'
         bat 'docker rm todoapp || exit 0'
-        bat 'docker run -d -p 8081:8081 --name todoapp rameshkumar13111@gmail.com/todoapp:1.0'
+        bat 'docker run -d -p 8081:8081 --name todoapp %DOCKER_CREDS_USR%/todoapp:1.0'
       }
     }
   }
