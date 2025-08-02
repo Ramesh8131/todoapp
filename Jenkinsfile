@@ -19,7 +19,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        bat 'mvn clean packages'
+        bat 'mvn clean package'
       }
     }
     stage('Start Containers') {
