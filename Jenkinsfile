@@ -2,8 +2,7 @@ pipeline {
   agent any
 
   environment {
-     DOCKER_USER = credentials('dockerhub-user')
-     DOCKER_PASS = credentials('dockerhub-pass')
+    DOCKER_CREDS = credentials('dockerhub-credentials') // only one credentials ID
   }
 
   stages {
@@ -21,14 +20,14 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        bat 'docker build -t yourdockerhub/todoapp:1.0 .'
+        bat 'docker build -t rameshkumar13111@gmail.com/myapp:1.0 .'
       }
     }
 
     stage('Docker Push') {
       steps {
-        bat 'echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin'
-        bat 'docker push yourdockerhub/todoapp:1.0'
+        bat 'echo %DOCKER_CREDS_PSW% | docker login -u %DOCKER_CREDS_USR% --password-stdin'
+        bat 'docker push rameshkumar13111@gmail.com/todoapp:1.0'
       }
     }
 
@@ -36,7 +35,7 @@ pipeline {
       steps {
         bat 'docker stop todoapp || exit 0'
         bat 'docker rm todoapp || exit 0'
-        bat 'docker run -d -p 8081:8081 --name todoapp yourdockerhub/todoapp:1.0'
+        bat 'docker run -d -p 8081:8081 --name todoapp rameshkumar13111@gmail.com/todoapp:1.0'
       }
     }
   }
