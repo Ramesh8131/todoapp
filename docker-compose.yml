@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: todoapp
-    image: myrepo/springboot-app:latest  # ✅ tag दें image को
+    image: myrepo/springboot-app:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/todoapp
       SPRING_DATASOURCE_USERNAME: myuser             
@@ -14,18 +14,18 @@ services:
     networks:
       - mynetwork
 
-  mysqldb:
-    image: mysql:8.0
-    container_name: mysql-container
-    networks:
-      - mynetwork
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_DATABASE: todoapp
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: user123
-    volumes:
-       - "c:/mysql_data:/var/lib/mysql"
+#  mysqldb:
+#    image: mysql:8.0
+#    container_name: mysql-container
+#    networks:
+#      - mynetwork
+#    environment:
+#      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+#      MYSQL_DATABASE: todoapp
+#      MYSQL_USER: myuser
+#      MYSQL_PASSWORD: user123
+#    volumes:
+#       - "c:/mysql_data:/var/lib/mysql"
 
 networks:
   mynetwork:
