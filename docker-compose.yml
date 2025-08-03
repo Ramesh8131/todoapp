@@ -26,7 +26,8 @@ services:
     networks:
       - mynetwork
     environment:
-      MYSQL_ROOT_PASSWORD: root123   # ✔️ सिर्फ ये चाहिए root के लिए
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      # MYSQL_ROOT_PASSWORD: root123   # ✔️ सिर्फ ये चाहिए root के लिए
       MYSQL_DATABASE: todoapp           # (optional) default DB create करेगा
       MYSQL_USER: myuser             # ✔️ नया user (root नहीं)
       MYSQL_PASSWORD: user123        # ✔️ उस user का password
