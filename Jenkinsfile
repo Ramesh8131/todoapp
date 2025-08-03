@@ -22,11 +22,11 @@ pipeline {
   //       bat 'mvn clean package -DskipTests'
   //     }
   //   }
-  //   stage('Start Containers') {
-  //     steps {
-  //       bat 'docker-compose up --build'
-  //     }
-  //   }
+    stage('Start Containers') {
+      steps {
+        bat 'docker-compose up --build'
+      }
+    }
 
   //   // stage('Docker Build') {
   //   //   steps {
@@ -41,23 +41,25 @@ pipeline {
   //   //   }
   //   // }
 
-  //      stage('Docker Login and Push') {
-  //         steps {
-  //             withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-  //                 bat '''
-  //                     echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
-  //                     docker tag todoapp:latest  %DOCKER_USERNAME%/todoapp:latest
-  //                     docker push %DOCKER_USERNAME%/todoapp:latest
-  //                 '''
-  //             }
-  //         }
-  //       }
-
+       stage('Docker Login and Push') {
+          steps {
+              withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                  bat '''
+                      echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                      docker tag mysql:8  %DOCKER_USERNAME%/mysql:8
+                      docker push %DOCKER_USERNAME%/mysql:latest
+                  '''
+              }
+          }
+        }
+// docker tag todoapp:latest  %DOCKER_USERNAME%/todoapp:latest
+                      // docker push %DOCKER_USERNAME%/todoapp:latest
+    
     stage('Deploy to Kubernetes') {
       steps {
         bat 'kubectl --kubeconfig=C:/Users/Sudhir/.kube/config apply -f deployment.yml'
       }
-    }
+    // }
     // stage('Run Locally') {
     //   steps {
     //     bat 'docker stop todoapp || exit 0'
