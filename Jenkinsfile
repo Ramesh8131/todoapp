@@ -58,6 +58,6 @@ pipeline {
     //     bat 'docker rm todoapp || exit 0'
     //     bat 'docker run -d -p 8081:8081 --name todoapp %DOCKER_CREDS_USR%/todoapp:1.0'
     //   }
-    }
+    //}
   }
 }
