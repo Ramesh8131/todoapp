@@ -53,6 +53,11 @@ pipeline {
           }
         }
 
+    stage('Deploy to Kubernetes') {
+      steps {
+        bat 'kubectl apply -f deployment.yaml'
+      }
+
     // stage('Run Locally') {
     //   steps {
     //     bat 'docker stop todoapp || exit 0'
