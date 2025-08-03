@@ -55,7 +55,7 @@ pipeline {
 
     stage('Deploy to Kubernetes') {
       steps {
-        bat 'kubectl apply -f deployment.yml'
+        bat 'kubectl --kubeconfig=C:/Users/Sudhir/.kube/config apply -f deployment.yml'
       }
     }
     // stage('Run Locally') {
