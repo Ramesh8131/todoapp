@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todoapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todoapp
+  template:
+    metadata:
+      labels:
+        app: todoapp
+    spec:
+      containers:
+        - name: todoapp-container
+          image: rameshkumar13111/todoapp:latest
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-service
+spec:
+  selector:
+    app: todoapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8081
+  type: NodePort
