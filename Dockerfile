@@ -21,7 +21,7 @@ WORKDIR /data
 COPY target/*.jar app.jar
 
 # Expose the Spring Boot default port
-# EXPOSE 8080
+ EXPOSE 8081
 
 # Run the jar
 # CMD ["java", "-jar", "app.jar"]
