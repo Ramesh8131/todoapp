@@ -57,7 +57,7 @@ pipeline {
       steps {
         bat 'kubectl apply -f deployment.yml'
       }
-
+    }
     // stage('Run Locally') {
     //   steps {
     //     bat 'docker stop todoapp || exit 0'
