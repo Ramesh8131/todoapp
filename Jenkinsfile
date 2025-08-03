@@ -59,7 +59,7 @@ pipeline {
       steps {
         bat 'kubectl --kubeconfig=C:/Users/Sudhir/.kube/config apply -f deployment.yml'
       }
-    // }
+    }
     // stage('Run Locally') {
     //   steps {
     //     bat 'docker stop todoapp || exit 0'
