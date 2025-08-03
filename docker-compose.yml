@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: todoapp
-    image: myrepo/todoapp:latest
+    image: todoapp:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/todoapp
       SPRING_DATASOURCE_USERNAME: myuser             
