@@ -34,12 +34,23 @@ pipeline {
     //   }
     // }
 
-    stage('Docker Push') {
-      steps {
-        bat 'echo %DOCKER_CREDS_PSW% | docker login -u %DOCKER_CREDS_USR% --password-stdin'
-        bat 'docker push %DOCKER_CREDS_USR%/todoapp:1.0'
-      }
-    }
+    // stage('Docker Push') {
+    //   steps {
+    //     bat 'echo %DOCKER_CREDS_PSW% | docker login -u %DOCKER_CREDS_USR% --password-stdin'
+    //     bat 'docker push %DOCKER_CREDS_USR%/todoapp:1.0'
+    //   }
+    // }
+
+       stage('Docker Login and Push') {
+          steps {
+              withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                  bat '''
+                      echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                      docker push %DOCKER_USERNAME%/pipeline-springboot-app:latest
+                  '''
+              }
+          }
+        }
 
     stage('Run Locally') {
       steps {
