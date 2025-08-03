@@ -13,25 +13,29 @@ spec:
       value: root
     - name: MYSQL_DATABASE
       value: tododb
+    - name: MYSQL_USER
+      value: myuser
+    - name: MYSQL_PASSWORD
+      value: user123
     ports:
     - containerPort: 3306
     volumeMounts:
     - name: mysql-data
       mountPath: /var/lib/mysql
   - name: todoapp
-    image: rameshkumar13111/todoapp:lates
+    image: rameshkumar13111/todoapp:latest   # ✅ fixed tag
     ports:
     - containerPort: 8080
     env:
     - name: SPRING_DATASOURCE_URL
-      value: jdbc:mysql://localhost:3306/tododb
+      value: jdbc:mysql://localhost:3306/tododb   # ✅ mysql है same pod में
     - name: SPRING_DATASOURCE_USERNAME
       value: myuser
     - name: SPRING_DATASOURCE_PASSWORD
       value: user123
   volumes:
   - name: mysql-data
-    emptyDir: {}
+    emptyDir: {}   # ⚠️ dev/test के लिए ही ठीक है
 ---
 apiVersion: v1
 kind: Service
@@ -43,5 +47,5 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8082
+      targetPort: 8080      # ✅ corrected to match todoapp container
   type: NodePort
