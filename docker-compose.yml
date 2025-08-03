@@ -14,18 +14,18 @@ services:
     networks:
       - mynetwork
 
-  mysqldb:     # ✅ Fixed indentation
-    image: mysql:8.0
-    container_name: mysql-container
-    networks:
-      - mynetwork
-    environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_DATABASE: todoapp
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: user123
-    volumes:
-      - "c:/mysql_data:/var/lib/mysql"
+  # mysqldb:     # ✅ Fixed indentation
+  #   image: mysql:8.0
+  #   container_name: mysql-container
+  #   networks:
+  #     - mynetwork
+  #   environment:
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: yes
+  #     MYSQL_DATABASE: todoapp
+  #     MYSQL_USER: myuser
+  #     MYSQL_PASSWORD: user123
+  #   volumes:
+  #     - "c:/mysql_data:/var/lib/mysql"
 
 networks:
   mynetwork:
