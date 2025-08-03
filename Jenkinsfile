@@ -46,7 +46,7 @@ pipeline {
               withCredentials([usernamePassword(credentialsId: 'DOCKER_CREDS', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                   bat '''
                       echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
-                      docker push %DOCKER_USERNAME%/pipeline-springboot-app:latest
+                      docker push %DOCKER_USERNAME%/todoapp:latest
                   '''
               }
           }
