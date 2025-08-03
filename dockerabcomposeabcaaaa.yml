@@ -6,7 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: todoapp
-    image: myrepo/springboot-app:latest  # ✅ tag दें image को
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysqldb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/todoapp
       SPRING_DATASOURCE_USERNAME: myuser             
@@ -17,16 +20,20 @@ services:
   mysqldb:
     image: mysql:8.0
     container_name: mysql-container
+    restart: always
+    ports:
+      - "3306:3306"
     networks:
       - mynetwork
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      MYSQL_DATABASE: todoapp
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: user123
+      # MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      # MYSQL_ROOT_PASSWORD: root123   # ✔️ सिर्फ ये चाहिए root के लिए
+      MYSQL_DATABASE: todoapp           # (optional) default DB create करेगा
+      MYSQL_USER: myuser             # ✔️ नया user (root नहीं)
+      MYSQL_PASSWORD: user123        # ✔️ उस user का password
     volumes:
-       - "c:/mysql_data:/var/lib/mysql"
-
+       - "c:/mysql_data:/var/lib/mysql"   # ✅ Named volume
 networks:
   mynetwork:
     driver: bridge
