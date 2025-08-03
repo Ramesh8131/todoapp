@@ -10,7 +10,7 @@ pipeline {
   //   DOCKER_CREDS = credentials('dockerhub-credentials')
   // }
 
-  // stages {
+  stages {
   //   stage('Clone') {
   //     steps {
   //       git 'https://github.com/Ramesh8131/todoapp.git'
@@ -65,5 +65,5 @@ pipeline {
     //     bat 'docker run -d -p 8081:8081 --name todoapp %DOCKER_CREDS_USR%/todoapp:1.0'
     //   }
     //}
-  //}
+  }
 }
