@@ -6,9 +6,9 @@ pipeline {
     maven 'Maven 3.8.6'
   }
 
-  environment {
-    DOCKER_CREDS = credentials('dockerhub-credentials')
-  }
+  // environment {
+  //   DOCKER_CREDS = credentials('dockerhub-credentials')
+  // }
 
   stages {
     stage('Clone') {
